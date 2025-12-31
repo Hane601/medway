@@ -1,0 +1,20 @@
+
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
+{% endblock %}
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}Medway Marketing Admin{% endblock %}
+
+{% block branding %}
+<h1 id="site-name" style="display:flex; align-items:center; gap:10px;">
+    <img src="{% static 'images/medway_logo.png' %}" 
+         alt="Medway Marketing"
+         height="40">
+    <span>Medway Marketing</span>
+</h1>
+{% endblock %}
