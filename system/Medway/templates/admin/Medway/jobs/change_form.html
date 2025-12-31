@@ -1,0 +1,22 @@
+{% extends "admin/change_form.html" %}
+
+{% block object-tools-items %}
+    {{ block.super }}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let deleteButton = document.querySelector(".deletelink");
+            if (deleteButton) {
+                deleteButton.style.display = "none";  // Hide the delete button
+            }
+        });
+    </script>
+
+    {% if has_delete_permission and not is_popup %}
+        <li>
+            <a href="{% url 'admin:Medway_jobs_delete' original.pk %}" class="button" 
+               style="background: red; color: white; padding: 10px 10px; border-radius: 5px; text-decoration: none;font-size: 30px; font-weight:bold;">
+                ❌ End Job
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}

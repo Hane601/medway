@@ -1,0 +1,14 @@
+{% extends "admin/delete_confirmation.html" %}
+
+{% block content %}
+    <h1>Are you sure you want to remove this job?</h1>
+    <p>This action cannot be undone. If you proceed, this job will be permanently removed.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="🚨 Confirm End Job" 
+       style="background: red; color: white; padding: 10px; border: none; border-radius: 5px; font-size: 30px; font-weight: bold;">
+    </form>
+
+    <a href="javascript:history.back()">Cancel</a>
+{% endblock %}

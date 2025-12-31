@@ -1,0 +1,61 @@
+/* Header */
+#header {
+    background-color: #ff7a00 !important;
+}
+
+/* Header text */
+#site-name, #site-name a {
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Buttons */
+.button, input[type=submit], .submit-row input {
+    background-color: #ff7a00 !important;
+    border-color: #ff7a00 !important;
+    color: white !important;
+}
+
+.button:hover {
+    background-color: #e66f00 !important;
+}
+
+/* Sidebar */
+#nav-sidebar {
+    background: #fff5ec;
+}
+
+/* Links */
+a {
+    color: #ff7a00;
+}
+
+/* Change header and main colors */
+#header, .module h2 {
+    background-color: #ff6600 !important; /* orange */
+    color: white !important;
+}
+
+#user-tools, #footer {
+    background-color: #ffffff !important; /* white */
+    color: #ff6600 !important; /* orange text if needed */
+}
+
+/* Change table headers */
+table th {
+    background-color: #ff6600 !important;
+    color: white !important;
+}
+
+/* Buttons */
+input, .button, .submit-row input {
+    background-color: #ff6600 !important;
+    color: white !important;
+    border: none !important;
+}
+
+input:hover, .button:hover, .submit-row input:hover {
+    background-color: #e65c00 !important; /* darker orange on hover */
+}
+
+
