@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ----------------------
 SECRET_KEY = 'django-insecure-gihjp#$9jt=w5i=gzn*0^!qsb*l(y&(ap-(^!q--s5&pipn3qi'
 DEBUG = True
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # ----------------------
 # INSTALLED APPS
@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Medway',  # Your app
+    'medwayapp',  # Your app
 ]
 
 # ----------------------

@@ -1,4 +1,2 @@
-web: gunicorn Medway.wsgi --log-file -
-
-
+web: gunicorn system.wsgi
 
