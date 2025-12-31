@@ -54,4 +54,4 @@ urlpatterns = [
     path('', views.login_user, name='login_user'),
     path(r'^jet/', include('jet.urls', 'jet')),
 ]
->>>>>>> 6d89ba74ab1ddeff966695d630aea766727aa552
+
