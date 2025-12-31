@@ -2,41 +2,31 @@ import os
 from pathlib import Path
 import dj_database_url
 
-# -------------------------
-# Base directory
-# -------------------------
+# BASE DIRECTORY
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# -------------------------
-# Security
-# -------------------------
-SECRET_KEY = os.environ.get('SECRET_KEY', 'your-local-secret-key')  # Use env var on Heroku
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+# SECRET KEY
+SECRET_KEY = os.environ.get('SECRET_KEY', 'your-local-secret-key')
 
-# Add your Heroku app host and localhost for development
-ALLOWED_HOSTS = os.environ.get(
-    'ALLOWED_HOSTS',
-    'localhost 127.0.0.1 medway-marketing-27b7230768a0.herokuapp.com'
-).split()
+# DEBUG MODE
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-# -------------------------
-# Installed apps
-# -------------------------
+# ALLOWED HOSTS
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost 127.0.0.1 medway-marketing-27b7230768a0.herokuapp.com').split()
+
+# INSTALLED APPS
 INSTALLED_APPS = [
-    'jet',               # django-jet
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Medway',
+    'Medway',  # your app
+    'jet',     # if using Django JET
 ]
 
-
-# -------------------------
-# Middleware
-# -------------------------
+# MIDDLEWARE
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # Heroku static files
@@ -48,15 +38,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# ROOT URL
 ROOT_URLCONF = 'system.urls'
 
-# -------------------------
-# Templates
-# -------------------------
+# TEMPLATES
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # optional
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,28 +58,19 @@ TEMPLATES = [
     },
 ]
 
+# WSGI APPLICATION
 WSGI_APPLICATION = 'system.wsgi.application'
 
-# -------------------------
-# Database
-# -------------------------
+# DATABASE CONFIGURATION
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL', f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
-# Heroku Postgres
-DATABASES['default'] = dj_database_url.config(
-    default=os.getenv('DATABASE_URL'),
-    conn_max_age=600,
-    ssl_require=True
-)
-
-# -------------------------
-# Password validation
-# -------------------------
+# PASSWORD VALIDATORS
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -98,29 +78,23 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# -------------------------
-# Internationalization
-# -------------------------
+# INTERNATIONALIZATION
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Colombo'
 USE_I18N = True
 USE_TZ = True
 
-# -------------------------
-# Static files
-# -------------------------
+# STATIC FILES
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [
+    BASE_DIR / 'Medway' / 'static',  # your app static files
+]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# -------------------------
-# Media files
-# -------------------------
+# MEDIA FILES
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# -------------------------
-# Default primary key field type
-# -------------------------
+# DEFAULT AUTO FIELD
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
