@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 """
 URL configuration for system project.
 
