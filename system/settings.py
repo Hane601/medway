@@ -18,10 +18,7 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.environ.get(
-    'ALLOWED_HOSTS',
-    'localhost 127.0.0.1'
-).split()
+ALLOWED_HOSTS = ['medway-marketing-27b7230768a0.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # --------------------------------------------------
