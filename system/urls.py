@@ -26,7 +26,7 @@ urlpatterns = [
     path('', views.login_user, name='login_user'),
     path(r'^jet/', include('jet.urls', 'jet')),
 ]
-=======
+
 """
 URL configuration for system project.
 
