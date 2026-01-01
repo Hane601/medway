@@ -89,13 +89,13 @@ class jobs(models.Model):
 
 class Store(models.Model):
 	name = models.CharField(max_length=500)
-	products = models.ManyToManyField(Product, through='StoreProduct')  # Many-to-Many with an intermediate model
+	#products = models.ManyToManyField(Product, through='StoreProduct')  # Many-to-Many with an intermediate model
 
 	def __str__(self):
 		return f"{self.name}"
 
 class StoreProduct(models.Model):  # This tracks the quantity of each product in a store
-    store = models.ForeignKey(Store, null=True, blank=True, on_delete=models.CASCADE)
+    #store = models.ForeignKey(Store, null=True, blank=True, on_delete=models.CASCADE)
     vehical = models.ForeignKey(Vehicle, null=True, blank=True, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
