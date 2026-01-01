@@ -42,7 +42,8 @@ class RepresentativeAdmin(admin.ModelAdmin):
 # ------------------ STORE ------------------
 @admin.register(Store)
 class StoreAdmin(admin.ModelAdmin):
-    inlines = [StoreProductInline]
+    #inlines = [StoreProductInline]
+    list_display = ['name']
 
 # ------------------ PRODUCT ------------------
 @admin.register(Product)
