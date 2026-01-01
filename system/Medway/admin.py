@@ -41,7 +41,7 @@ class StoreProductInline(admin.TabularInline):
     model = StoreProduct
     extra = 1
     fields = ("product", "quantity")
-    autocomplete_fields = ("product",)
+    autocomplete_fields = []
 
 
 class MonthlySalesInline(admin.TabularInline):
