@@ -16,6 +16,7 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost 127.0.0.1 medway-mark
 
 # INSTALLED APPS
 INSTALLED_APPS = [
+    'jet',     # if using Django JET
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -23,7 +24,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Medway',  # your app
-    'jet',     # if using Django JET
 ]
 
 # MIDDLEWARE
