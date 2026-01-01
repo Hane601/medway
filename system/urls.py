@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include('Medway.urls')),
     path('admin/', admin.site.urls),
     path('', views.login_user, name='login_user'),
-    path(r'^jet/', include('jet.urls', 'jet')),
+    #path(r'^jet/', include('jet.urls', 'jet')),
 ]
 
 """
