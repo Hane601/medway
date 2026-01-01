@@ -32,6 +32,7 @@ from .forms import ProductAdminForm
 admin.site.register(Route)
 admin.site.register(Drivers)
 admin.site.register(Supplier)
+admin.site.register(Store)
 
 
 # --------------------------------------------------
@@ -66,9 +67,10 @@ class RepresentativeAdmin(admin.ModelAdmin):
 # --------------------------------------------------
 # STORE ADMIN
 # --------------------------------------------------
-@admin.register(Store)
-class StoreAdmin(admin.ModelAdmin):
-    list_display = ("name",)
+
+#@admin.register(Store)
+#class StoreAdmin(admin.ModelAdmin):
+ #   list_display = ("name",)
     #inlines = [StoreProductInline]
 
 
