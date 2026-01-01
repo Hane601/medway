@@ -1,9 +1,0 @@
-{% extends "admin/change_form.html" %}
-
-{% block delete_link %}
-    {% if has_delete_permission and not is_popup %}
-        <p class="deletelink-box">
-            <a href="{{ delete_url }}" class="deletelink">🗑️ Remove Item</a>
-        </p>
-    {% endif %}
-{% endblock %}

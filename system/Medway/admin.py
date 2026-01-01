@@ -14,11 +14,9 @@ from .models import (
 from django.db.models import F
 from django.utils.timezone import now
 from datetime import date
-
-
-admin.site.site_header = "Medway Marketing Administration"
-admin.site.site_title = "Medway Marketing Admin"
-admin.site.index_title = "Welcome to Medway Marketing Admin Panel"
+from django.contrib import admin
+from .models import Product
+from .forms import ProductAdminForm
 
 # ------------------ BASIC REGISTRATIONS ------------------
 admin.site.register(Route)
@@ -273,3 +271,11 @@ class JobsAdmin(admin.ModelAdmin):
             response = HttpResponse(pdf.read(), content_type='application/pdf')
             response['Content-Disposition'] = f'inline; filename=Job_Report_{job.id}.pdf'
             return response
+
+admin.site.site_header = "Medway Marketing Administration"
+admin.site.site_title = "Medway Marketing Admin"
+admin.site.index_title = "Welcome to Medway Marketing Admin Panel"
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    form = ProductAdminForm

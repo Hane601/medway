@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+
+    <style>
+        /* Orange to White Fade Background */
+        body {
+            background: linear-gradient(to bottom right, #ff8800, #ffffff);
+            color: #333;
+            font-family: "Segoe UI", Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        form {
+            background: white;
+            width: 420px;
+            margin: auto;
+            padding: 25px 30px;
+            border-radius: 14px;
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.22);
+            text-align: left;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Messages */
+        .error-message {
+            color: #b30000;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: 15px;
+            display: block;
+        }
+
+        /* Uniform Inputs */
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #cccccc;
+            background: #fafafa;
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #ff8800;
+            background: white;
+            outline: none;
+            box-shadow: 0 0 6px rgba(255, 136, 0, 0.4);
+        }
+
+        /* Button */
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #ff8800;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #e67300;
+        }
+
+        /* Quantity Text */
+        .qty-label {
+            display: block;
+            font-size: 14px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!--{% if messages %}
+        <div>
+            {% for message in messages %}
+                <p class="error-message">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}-->
+
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Medway Marketing billing portal</h2><br><br><br>
+
+        <label>Customer</label>
+        <input type="text" name="Customer"><br><br><br><br>
+
+        {% for key, value in stock %}
+            <label>{{ key }}</label>
+            <input type="number" name="{{ key }}" min="0">
+            <span class="qty-label">Available: {{ value }}</span>
+        {% endfor %}
+
+        <br><br>
+        <label>Discount</label>
+        <input type="number" name="Discount">
+
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>
