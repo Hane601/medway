@@ -3,15 +3,13 @@
 
 {% block title %}Medway Marketing Admin{% endblock %}
 
-{% block extrastyle %}
-<link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
-{% endblock %}
-
 {% block branding %}
 <h1 id="site-name" style="display:flex; align-items:center; gap:10px;">
-    <img src="{% static 'images/medway_logo.png' %}"
-         alt="Medway Marketing"
-         height="40">
+    <img src="{% static 'images/medway_logo.png' %}" alt="Medway Marketing" height="40">
     <span>Medway Marketing</span>
 </h1>
+{% endblock %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
 {% endblock %}
