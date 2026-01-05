@@ -89,7 +89,8 @@ class jobs(models.Model):
 
 class Store(models.Model):
 	name = models.CharField(max_length=500)
-	#products = models.ManyToManyField(Product, through='StoreProduct')  # Many-to-Many with an intermediate model
+	products = models.ManyToManyField(Product, through='StoreProduct')  # Many-to-Many with an intermediate model
+	
 
 	def __str__(self):
 		return f"{self.name}"

@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-import dj_database_url
 
 # BASE DIRECTORY
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,7 +15,6 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost 127.0.0.1 medway-mark
 
 # INSTALLED APPS
 INSTALLED_APPS = [
-    'jet',     # if using Django JET
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,17 +61,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'system.wsgi.application'
 
 
-# Default: local SQLite
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-# If DATABASE_URL exists (Heroku), override
-if os.environ.get("DATABASE_URL"):
-    DATABASES["default"] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# Only override on Heroku
+if 'DATABASE_URL' in os.environ:
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # PASSWORD VALIDATORS
 AUTH_PASSWORD_VALIDATORS = [

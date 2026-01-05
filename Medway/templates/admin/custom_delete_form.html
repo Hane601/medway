@@ -1,0 +1,45 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+<h1>End Job: {{ object }}</h1>
+<p>Add all expenses before completing the job:</p>
+
+<form method="post">
+    {% csrf_token %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Expense Name</th>
+                <th>Amount (Rs)</th>
+            </tr>
+        </thead>
+        <tbody id="expense_rows">
+            <tr>
+                <td><input type="text" name="expense_name_1" required></td>
+                <td><input type="number" name="expense_amount_1" step="0.01" required></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button type="button" onclick="addExpenseRow()">+ Add Another Expense</button>
+    <br><br>
+    <input type="submit" value="Complete Job" class="default">
+</form>
+
+<script>
+let expenseCount = 1;
+
+function addExpenseRow() {
+    expenseCount += 1;
+    const tbody = document.getElementById('expense_rows');
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td><input type="text" name="expense_name_${expenseCount}" required></td>
+        <td><input type="number" name="expense_amount_${expenseCount}" step="0.01" required></td>
+    `;
+    tbody.appendChild(row);
+}
+</script>
+{% endblock %}

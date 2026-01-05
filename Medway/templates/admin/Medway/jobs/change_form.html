@@ -1,0 +1,38 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block after_related_objects %}
+<hr>
+<h2>Expenses</h2>
+
+<div id="expenses">
+    <div class="expense-row">
+        <input type="text" name="expense_name_1" placeholder="Expense name">
+        <input type="number" name="expense_amount_1" placeholder="Amount">
+    </div>
+</div>
+
+<button type="button" onclick="addExpense()">+ Add Expense</button>
+
+<script>
+let count = 1;
+function addExpense() {
+    count++;
+    const div = document.createElement("div");
+    div.className = "expense-row";
+    div.innerHTML = `
+        <input type="text" name="expense_name_${count}" placeholder="Expense name">
+        <input type="number" name="expense_amount_${count}" placeholder="Amount">
+    `;
+    document.getElementById("expenses").appendChild(div);
+}
+</script>
+
+<style>
+.expense-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+</style>
+{% endblock %}

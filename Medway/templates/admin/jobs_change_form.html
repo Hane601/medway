@@ -1,0 +1,47 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block object-tools %}
+    {{ block.super }}
+    {% if change %}
+
+    {% endif %}
+{% endblock %}
+
+{% block after_field_sets %}
+    {{ block.super }}
+
+            <br><br><br>
+        <li>
+            <form method="post" action="" style="display:inline;">
+                {% csrf_token %}
+                    <h3>Expenses</h3>
+                <div id="expenses-container">
+                    <div class="expense-row">
+                        Name: <input type="text" name="expense_name_0" />
+                        Amount: <input type="number" name="expense_amount_0" step="0.01" />
+                    </div>
+                </div>
+                <br>
+                <button type="button" id="add-expense" class="button">Add another expense</button><br><br>
+                <input type="hidden" name="end_job" value="1" >
+                <button type="submit" class="button default" style="background-color: #f44336; color:white; padding: 15px;">
+                    <strong>End Job</strong> 
+                </button>
+            </form>
+        </li>
+        <br><br><br>
+
+    <script>
+    let expenseCount = 1;
+    document.getElementById('add-expense').onclick = function() {
+        const container = document.getElementById('expenses-container');
+        const div = document.createElement('div');
+        div.className = 'expense-row';
+        div.innerHTML = `Name: <input type="text" name="expense_name_${expenseCount}" /> Amount: <input type="number" name="expense_amount_${expenseCount}" step="0.01" />`;
+        container.appendChild(div);
+        expenseCount++;
+    };
+    </script>
+{% endblock %}
+
