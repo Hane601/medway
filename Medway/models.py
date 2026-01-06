@@ -1,6 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import make_password, check_password
+from django.db.models import F, Sum
+from django.db.models.functions import Coalesce
+from decimal import Decimal
+from django.db.models import F, Sum, DecimalField
+from django.db.models.functions import Cast, Coalesce
+from decimal import Decimal
 
 class Representative(models.Model):
     Name = models.CharField(max_length=100)
@@ -64,6 +70,51 @@ class Vehicle(models.Model):
 
 	def __str__(self):
 		return f"{self.Name}{'\u00A0\u00A0\u00A0'}{'\u00A0\u00A0\u00A0'}{self.Vehical_no}"
+	
+	# 🔥 TOTAL SELLING VALUE IN VEHICLE
+	def total_stock_value(self):
+		total = StoreProduct.objects.filter(
+			vehical=self
+		).aggregate(
+			total=Coalesce(
+				Sum(
+					F("quantity") *
+					Cast(
+						F("product__Selling_price"),
+						output_field=DecimalField(max_digits=10, decimal_places=2)
+					),
+					output_field=DecimalField(max_digits=12, decimal_places=2)
+				),
+				Decimal("0")
+			)
+		)["total"]
+
+		return total
+
+	# 🔥 TOTAL COST IN VEHICLE
+	def total_stock_cost(self):
+		total = StoreProduct.objects.filter(
+			vehical=self
+		).aggregate(
+			total=Coalesce(
+				Sum(
+					F("quantity") *
+					Cast(
+						F("product__cost"),
+						output_field=DecimalField(max_digits=10, decimal_places=2)
+					),
+					output_field=DecimalField(max_digits=12, decimal_places=2)
+				),
+				Decimal("0")
+			)
+		)["total"]
+
+		return total
+
+	# 🔥 EXPECTED PROFIT IN VEHICLE
+	def total_stock_profit(self):
+		return self.total_stock_value() - self.total_stock_cost()
+
 
 class Drivers(models.Model):
 	Name = models.CharField(max_length=500)
@@ -91,9 +142,48 @@ class Store(models.Model):
 	name = models.CharField(max_length=500)
 	products = models.ManyToManyField(Product, through='StoreProduct')  # Many-to-Many with an intermediate model
 	
+	
+	def total_stock_value(self):
+		total = StoreProduct.objects.filter(
+			store=self
+		).aggregate(
+			total=Coalesce(
+				Sum(
+					F("quantity") *
+					Cast(
+						F("product__Selling_price"),
+						output_field=DecimalField(max_digits=10, decimal_places=2)
+					),
+					output_field=DecimalField(max_digits=12, decimal_places=2)
+				),
+				Decimal("0.00")
+			)
+		)["total"]
 
-	def __str__(self):
-		return f"{self.name}"
+		return total
+
+	def total_stock_cost(self):
+		total = StoreProduct.objects.filter(
+			store=self
+		).aggregate(
+			total=Coalesce(
+				Sum(
+					F("quantity") *
+					Cast(
+						F("product__cost"),
+						output_field=DecimalField(max_digits=10, decimal_places=2)
+					),
+					output_field=DecimalField(max_digits=12, decimal_places=2)
+				),
+				Decimal("0.00")
+			)
+		)["total"]
+
+		return total
+	
+	# 🔥 EXPECTED PROFIT IN VEHICLE
+	def total_stock_profit(self):
+		return self.total_stock_value() - self.total_stock_cost()
 
 class StoreProduct(models.Model):  # This tracks the quantity of each product in a store
     store = models.ForeignKey(Store, null=True, blank=True, on_delete=models.CASCADE)
