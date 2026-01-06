@@ -75,6 +75,26 @@ class StoreAdmin(admin.ModelAdmin):
     list_display = ["name",]
     inlines = [StoreProductInline]
 
+    readonly_fields = (
+        "total_value_display",
+        "total_cost_display",
+        "total_profit_display",
+    )
+
+    def total_value_display(self, obj):
+        return f"Rs {obj.total_stock_value():,.2f}"
+
+    total_value_display.short_description = "Total Stock Value (Selling)"
+
+    def total_cost_display(self, obj):
+        return f"Rs {obj.total_stock_cost():,.2f}"
+
+    total_cost_display.short_description = "Total Stock Cost"
+
+    def total_profit_display(self, obj):
+        return f"Rs {obj.total_stock_profit():,.2f}"
+    total_profit_display.short_description = "Expected Profit"
+
 
 # --------------------------------------------------
 # PRODUCT ADMIN (ONLY ONE — IMPORTANT)
@@ -117,6 +137,24 @@ class VehicleAdmin(admin.ModelAdmin):
                 obj.save()
 
         super().save_related(request, form, formsets, change)
+
+    readonly_fields = (
+        "total_value_display",
+        "total_cost_display",
+        "total_profit_display",
+    )
+
+    def total_value_display(self, obj):
+        return f"Rs {obj.total_stock_value():,.2f}"
+    total_value_display.short_description = "Total Stock Value (Selling)"
+
+    def total_cost_display(self, obj):
+        return f"Rs {obj.total_stock_cost():,.2f}"
+    total_cost_display.short_description = "Total Stock Cost"
+
+    def total_profit_display(self, obj):
+        return f"Rs {obj.total_stock_profit():,.2f}"
+    total_profit_display.short_description = "Expected Profit"
 
 
 # --------------------------------------------------
