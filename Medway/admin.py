@@ -35,7 +35,7 @@ from .forms import ProductAdminForm
 admin.site.register(Route)
 admin.site.register(Drivers)
 admin.site.register(Supplier)
-
+admin.site.register(Sale)
 
 # --------------------------------------------------
 # INLINE MODELS
