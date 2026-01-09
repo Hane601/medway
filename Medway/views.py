@@ -95,8 +95,8 @@ def rep_view(request):
         c.setFont("Helvetica-Bold", 15)
         c.drawString(40, 650, "QTY")
         c.drawString(100, 650, "Product")
-        c.drawString(270, 650, "Rate")
-        c.drawString(420, 650, "Amount")
+        c.drawString(350, 650, "Rate")
+        c.drawString(470, 650, "Amount")
         c.line(40, 640, 540, 640)
 
         y = 610
@@ -118,6 +118,7 @@ def rep_view(request):
                 vehicle_stock = StoreProduct.objects.filter(
                     vehical=vehicle, product=product
                 ).first()
+                print(key)
                 job = jobs.objects.filter(Vehicle=vehicle).first()
 
                 if not vehicle_stock:
@@ -155,7 +156,7 @@ def rep_view(request):
                 c.setFont("Helvetica", 14)
                 c.drawString(40, y, str(qty))
                 c.drawString(100, y, product.Name)
-                c.drawString(270, y, str(int(price)))
+                c.drawString(350, y, str(int(price)))
                 c.drawRightString(520, y, str(amount))
                 y -= 30
 
