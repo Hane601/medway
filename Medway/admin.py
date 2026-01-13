@@ -190,7 +190,7 @@ class JobsForm(forms.ModelForm):
 # --------------------------------------------------
 @admin.register(jobs)
 class JobsAdmin(admin.ModelAdmin):
-    #readonly_fields = ("sale",)
+    readonly_fields = ("sale",)
     exclude = ("cos", "profit",)
 
     # ---------------- USE CUSTOM TEMPLATE ----------------
