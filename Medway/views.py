@@ -123,14 +123,14 @@ def rep_view(request):
 
                 if not vehicle_stock:
                     messages.error(request, f"No stock for {product.Name}")
-                    continue
+                    return redirect('rep_view')
 
                 if vehicle_stock.quantity < qty:
                     messages.error(
                         request,
                         f"Not enough stock for {product.Name}. Available: {vehicle_stock.quantity}"
                     )
-                    continue
+                    return redirect('rep_view')
 
                 retail_price = int(product.Retail_price)
                 # ===== PRICE LOGIC =====
@@ -199,3 +199,4 @@ def rep_view(request):
 
     # ✅ THIS LINE FIXES YOUR ERROR
     return render(request, "rep_view.html", {"stock": stocks.items()})
+
